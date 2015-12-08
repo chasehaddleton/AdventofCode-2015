@@ -15,7 +15,7 @@ public class dayTwo {
         int total = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Chase\\Documents\\Programming\\Advent " +
-                "of Code\\src\\dayTwo\\input.txt"))) {
+                "of Code\\src\\dayTwo\\testing.txt"))) {
             String line = br.readLine();
 
             while (line != null) {
@@ -36,12 +36,6 @@ public class dayTwo {
         System.out.println(total);
     }
 
-    private int getSideLength(String input) {
-        int size = Integer.parseInt(input);
-        input = input.substring(0, input.indexOf('x'));
-        return size;
-    }
-
     static class Present {
         int width;
         int height;
@@ -59,12 +53,11 @@ public class dayTwo {
 
         int getWrappingPaper() {
             int total = (2 * length * width) + (2 * width * height) + (2 * height * length);
-            int slack;
             int small1 = (width < height || width < length) ? width : 1;
             int small2 = (height < width || height < length) ? height : 1;
             int small3 = (length < height || length < width) ? length : 1;
 
-            slack = small1 * small2 * small3;
+            int slack = small1 * small2 * small3;
 
             return total + slack;
         }
