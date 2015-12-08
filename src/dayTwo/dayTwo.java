@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.ListIterator;
 
 /**
  * Created by Chase on 2015-12-04.
@@ -13,7 +12,8 @@ import java.util.ListIterator;
 public class dayTwo {
     public static void main(String args[]) {
         ArrayList<Present> presents = new ArrayList<>();
-        int total = 0;
+        int totalWrapping = 0;
+        int totalRibbon = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Chase\\Documents\\Programming\\Advent " +
                 "of Code\\src\\dayTwo\\input.txt"))) {
@@ -28,13 +28,13 @@ public class dayTwo {
             System.out.println(ex.getMessage());
         }
 
-        ListIterator<Present> presentList = presents.listIterator();
-
-        while (presentList.hasNext()) {
-            total += presentList.next().getWrappingPaper();
+        for (Present gift: presents) {
+            totalWrapping += gift.getWrappingPaper();
+            totalRibbon += gift.getRibbon();
         }
 
-        System.out.println(total);
+        System.out.println("Total wrapping paper needed: " + totalWrapping);
+        System.out.println("Total ribbon needed: " + totalRibbon);
     }
 
     static class Present {
@@ -54,6 +54,10 @@ public class dayTwo {
 
         int getWrappingPaper() {
             return (3 * sides[0] * sides[1]) + (2 * sides[1] * sides[2]) + (2 * sides[2] * sides[0]);
+        }
+
+        int getRibbon() {
+            return (2*sides[0] + 2*sides[1]) + (sides[0] * sides[1] * sides[2]);
         }
     }
 }
