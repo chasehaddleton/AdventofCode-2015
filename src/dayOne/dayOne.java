@@ -11,7 +11,8 @@ public class dayOne {
     public static void main(String args[]) {
         StringBuffer sb = new StringBuffer();
         int fileLength;
-        int count = 0;
+        int floor = 0;
+        int enterBasement = -1;
 
         try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Chase\\Documents\\Programming\\Advent " +
                 "of Code\\src\\dayOne\\~input.txt"))) {
@@ -27,11 +28,14 @@ public class dayOne {
 
         fileLength = sb.length();
 
-        for(int i = 0; i < fileLength; i++) {
-            if (sb.charAt(i) == '(') count++;
-            else count--;
+        for (int i = 0; i < fileLength; i++) {
+            if (sb.charAt(i) == '(') floor++;
+            else floor--;
+
+            if (floor == -1 && enterBasement == -1) enterBasement = i;
         }
 
-        System.out.println(count);
+        System.out.println(floor);
+        if (enterBasement > 0) System.out.println(enterBasement + 1);
     }
 }
